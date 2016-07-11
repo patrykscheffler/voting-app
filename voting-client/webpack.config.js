@@ -16,11 +16,18 @@ module.exports = {
     hot: true
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'react-hot!babel'
-    }]
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'react-hot!babel'
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style!css!postcss'
+      }
+    ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

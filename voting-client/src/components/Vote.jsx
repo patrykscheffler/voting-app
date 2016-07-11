@@ -1,5 +1,6 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import classNames from 'classnames';
 
 export default class Vote extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class Vote extends React.Component {
       <div className="voting">
         {this.getPair().map(entry =>
           <button key={entry}
+                  className={classNames({voted: this.hasVotedFor(entry)})}
                   onClick={() => this.props.vote(entry)}
                   disabled={this.isDisabled()}>
             <h1>{entry}</h1>
