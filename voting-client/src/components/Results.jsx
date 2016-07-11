@@ -37,6 +37,11 @@ export class Results extends React.Component {
           )}
         </div>
         <div className="management">
+          <button ref="restart"
+                  className="restart"
+                  onClick={this.props.restart}>
+            Restart
+          </button>
           <button ref="next"
                   className="next"
                   onClick={this.props.next}>

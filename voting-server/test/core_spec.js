@@ -1,7 +1,7 @@
 import { List, Map } from 'immutable';
 import { expect } from 'chai';
 
-import { setEntries, next, vote } from '../src/core';
+import { setEntries, next, vote, restart } from '../src/core';
 
 describe('application logic', () => {
 
@@ -13,7 +13,8 @@ describe('application logic', () => {
       const nextState = setEntries(state, entries);
 
       expect(nextState).to.equal(Map({
-        entries: List.of('Trainspotting', '28 Days Later')
+        entries: List.of('Trainspotting', '28 Days Later'),
+        initialEntries: List.of('Trainspotting', '28 Days Later')
       }));
     });
 
@@ -77,6 +78,31 @@ describe('application logic', () => {
           pair: List.of('Sunshine', 'Millions')
         }),
         entries: List.of('127 Hours', 'Trainspotting', '28 Days Later')
+      }));
+    });
+
+  });
+
+  describe('restart', () => {
+
+    it('return to initial entries', () => {
+      const state = Map({
+        vote: Map({
+          round: 1,
+          pair: List.of('Sunshine', 'Millions')
+        }),
+        entries: List(),
+        initialEntries: List.of('127 Hours', 'Sunshine', 'Millions')
+      });
+      const nextState = restart(state);
+
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          round: 1,
+          pair: List.of('127 Hours', 'Sunshine')
+        }),
+        entries: List.of('Millions'),
+        initialEntries: List.of('127 Hours', 'Sunshine', 'Millions')
       }));
     });
 
